@@ -3,82 +3,62 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\Type\TypeRepositoryInterface;
+use App\Http\Requests\TypeRequest;
 
 class TypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public $typeRepo;
+
+    public function __construct(TypeRepositoryInterface $typeRepo)
     {
-        //
+        $this->typeRepo = $typeRepo;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+        $conditions[]   = $request->all();
+        $types          = $this->typeRepo->search($conditions);
+        return view('types.list',compact('types'));
+    }
+
     public function create()
     {
-        //
+        return view('types.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $this->typeRepo->store($input);
+        return redirect()->route('types.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('types.edit')->with('type', $this->typeRepo->edit($id));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $this->typeRepo->update($input, $id);
+        return redirect()->route('types.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $this->typeRepo->destroy($id);
+        return redirect()->route('types.index');
+    }
+
+    public function confirm(TypeRequest $request)
+    {
+        return view('types.confirm',compact('request'));
     }
 }
