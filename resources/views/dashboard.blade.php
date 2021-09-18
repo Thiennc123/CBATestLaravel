@@ -6,8 +6,8 @@
         <div class="sidebar">
             <h2>Sidebar</h2>
             <ul>
-                <li><a href="{{ route('types.list') }}"><i class="fas fa-home"></i>Detail User</a></li>
-                <li><a href=""><i class="fas fa-user"></i>List Event</a></li>
+                <li><a href="{{ route('types.index') }}"><i class="fas fa-home"></i>Type of Product</a></li>
+                <li><a href=""><i class="fas fa-user"></i>List Properties</a></li>
             </ul>
             <div class="social_media">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>

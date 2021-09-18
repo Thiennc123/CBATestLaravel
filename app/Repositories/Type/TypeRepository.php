@@ -9,11 +9,13 @@ class TypeRepository extends BaseRepository implements TypeRepositoryInterface
     //lấy model tương ứng
     public function getModel()
     {
-        return \App\Models\Product::class;
+        return \App\Models\Type::class;
     }
 
-    public function getProduct()
+    public function search(array $request = [], $limit = 10)
     {
-        return $this->model->select('product_name')->take(5)->get();
+        $datas = $this->model->paginate($limit);
+
+        return $datas;
     }
 }

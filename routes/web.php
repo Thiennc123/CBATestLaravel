@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+Route::post('types/confirm', [TypeController::class, 'confirm'])->name('types.confirm')->middleware('auth');
+Route::resource('types', TypeController::class)->middleware('auth');
 
 

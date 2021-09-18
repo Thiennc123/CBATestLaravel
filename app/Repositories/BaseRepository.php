@@ -44,8 +44,6 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function store(array $input)
     {
-        //$admin = $this->model->create($input);
-        //$this->model->storeAdminRole($admin->id, $input['role_id']);
         return $this->model->create($input);
     }
 
