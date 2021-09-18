@@ -6,7 +6,6 @@ use App\Repositories\Attribute\AttributeRepositoryInterface;
 
 class AttributeRepository extends BaseRepository implements AttributeRepositoryInterface
 {
-    //lấy model tương ứng
     public function getModel()
     {
         return \App\Models\Attribute::class;

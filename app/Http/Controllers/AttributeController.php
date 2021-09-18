@@ -3,82 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\Attribute\AttributeRepositoryInterface;
+use App\Http\Requests\AttributeRequest;
 
 class AttributeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public $attributeRepo;
+
+    public function __construct(AttributeRepositoryInterface $attributeRepo)
     {
-        //
+        $this->attributeRepo = $attributeRepo;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+        $conditions[]        = $request->all();
+        $attributes          = $this->attributeRepo->search($conditions);
+        return view('attributes.list',compact('attributes'));
+    }
+
     public function create()
     {
-        //
+        return view('attributes.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $this->attributeRepo->store($input);
+        return redirect()->route('attributes.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('attributes.edit')->with('attribute', $this->attributeRepo->edit($id));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $this->attributeRepo->update($input, $id);
+        return redirect()->route('attributes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
-        //
+        $this->attributeRepo->destroy($id);
+        return redirect()->route('attributes.index');
+    }
+
+    public function confirm(AttributeRequest $request)
+    {
+        return view('attributes.confirm',compact('request'));
     }
 }
