@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\AttributeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 Route::post('types/confirm', [TypeController::class, 'confirm'])->name('types.confirm')->middleware('auth');
 Route::resource('types', TypeController::class)->middleware('auth');
+
+Route::post('attributes/confirm', [AttributeController::class, 'confirm'])->name('attributes.confirm')->middleware('auth');
+Route::resource('attributes', AttributeController::class)->middleware('auth');
 
 
