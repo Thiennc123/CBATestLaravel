@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ Route::resource('types', TypeController::class)->middleware('auth');
 
 Route::post('attributes/confirm', [AttributeController::class, 'confirm'])->name('attributes.confirm')->middleware('auth');
 Route::resource('attributes', AttributeController::class)->middleware('auth');
+
+Route::resource('products', ProductController::class)->middleware('auth');
 
 

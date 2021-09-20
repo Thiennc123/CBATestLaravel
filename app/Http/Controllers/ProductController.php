@@ -3,17 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\Type\TypeRepositoryInterface;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public $productRepo;
+    public $typeRepo;
+
+    public function __construct(ProductRepositoryInterface $productRepo, TypeRepositoryInterface $typeRepo)
     {
-        //
+        $this->productRepo = $productRepo;
+        $this->typeRepo = $typeRepo;
+    }
+
+    public function index(Request $request)
+    {
+        $types = $this->typeRepo->getAll();
+        return view('products.list', compact('types'));
     }
 
     /**
@@ -23,7 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $types = $this->typeRepo->getAll();
+        return view('products.add', compact('types'));
     }
 
     /**

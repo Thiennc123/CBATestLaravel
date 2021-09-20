@@ -17,4 +17,13 @@ class Type extends Model
         'description',
     ];
 
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'attribute_type', 'type_id', 'attribute_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
