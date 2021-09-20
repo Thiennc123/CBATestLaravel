@@ -15,4 +15,14 @@ class Attribute extends Model
         'id',
         'name',
     ];
+
+     public function products()
+    {
+        return $this->belongsToMany(Product::class, 'attribute_product', 'attribute_id', 'product_id');
+    }
+
+    public function types()
+    {
+        return $this->belongsToMany(Type::class, 'attribute_type', 'attribute_id', 'type_id');
+    }
 }

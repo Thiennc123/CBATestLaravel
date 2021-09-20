@@ -28,8 +28,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function getAll()
     {
-        $admin = $this->model::orderBy('id', 'desc')->paginate(10);
-        return $admin;
+        return $this->model->all();
     }
 
     /*public function find($id)
@@ -49,15 +48,15 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function edit($id)
     {
-        $user = $this->model::find($id);
+        $user = $this->model->find($id);
         return $user;
     }
 
     public function update(array $input, $id)
     {
-        $this->model::find($id)->update($input);
-        //$user = User::find($id);
-        //$user->roles()->sync($input['role_id']);
+        $data = $this->model::find($id);
+        $data->update($input);
+        return $data;
     }
 
     public function destroy($id)

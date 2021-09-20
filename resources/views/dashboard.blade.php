@@ -8,6 +8,7 @@
             <ul>
                 <li><a href="{{ route('types.index') }}"><i class="fas fa-home"></i>Type of Product</a></li>
                 <li><a href="{{ route('attributes.index') }}"><i class="fas fa-user"></i>List Properties</a></li>
+                <li><a href="{{ route('products.index') }}"><i class="fas fa-user"></i>List Product</a></li>
             </ul>
             <div class="social_media">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>

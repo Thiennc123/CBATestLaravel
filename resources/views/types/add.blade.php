@@ -17,6 +17,19 @@
             <label for="exampleInputPassword1">Description</label>
             <input type="description" class="form-control" name="description" id="description" placeholder=" Enter description">
         </div>
+        <div class="form-group">
+            Attribute:
+            @foreach($attributes as $item)
+            <h6 class="card-title">
+            <label>
+                <input type="checkbox" name="attribute[]"
+                value="{{$item->id}}">
+            </label>
+            {{$item->name}}
+            </h6>
+            
+            @endforeach
+        </div>
         <button type="submit" class="btn btn-primary">Create Type</button>
     </form>
 </div>

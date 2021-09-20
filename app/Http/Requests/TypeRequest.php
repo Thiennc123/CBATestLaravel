@@ -20,8 +20,8 @@ class TypeRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name'          => 'required|min:8',
-            'description'   => 'required|min:8',
+            'name'          => 'required|min:3',
+            'description'   => 'required|min:3',
 
         ];
 
