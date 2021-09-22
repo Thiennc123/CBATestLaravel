@@ -14,17 +14,32 @@
                 <tr>
                     <th scope=" col" style="width:5%" class="text-center">ID</th>
                     <th scope="col" style="width:20%" class="text-center">Name</th>
+                    <th scope="col" style="width:20%" class="text-center">Type</th>
+                    <th scope="col" style="width:20%" class="text-center">Attribute</th>
+                    <th scope="col" style="width:20%" class="text-center">Price</th>
+                    <th scope="col" style="width:20%" class="text-center">Image</th>
                     <th scope="col" style="width:20%" class="text-center"></th>
                 </tr>
             </thead>
             <tbody>
-                
-                <tr class="thien1">
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
+                @foreach ( $products as $product )
+                    <tr class="thien1">
+                    <td class="text-center">{{$product->id}}</td>
+                    <td class="text-center">{{$product->name}}</td>
+                    <td class="text-center">{{$product->type->name}}</td>
+                    <td>
+                        @foreach($product->attributes as $attribute)
+                            {{$attribute['name']}} : {{$attribute->pivot->value}}
+                            <br>
+                        @endforeach
+                    </td>
+                    <td class="text-center">{{$product->price}}</td>
+                    <td class="text-center">
+                        <img src="{{ asset('/storage/images/' . $product->medias[0]['path']) }}" alt="">
+                    </td>
                     <td class="text-center d-flex">
-                        <a href="" class="btn btn-info">Edit</a>
-                        <form action="" method="POST" class="ml-2">
+                        <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="btn btn-info">Edit</a>
+                        <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST" class="ml-2">
                             @csrf
                             @method("DELETE")
                             <button type="submit" onclick="return  confirm('Are you sure?')"
@@ -32,7 +47,7 @@
                         </form>
                     </td>
                 </tr>
-                
+                @endforeach
             </tbody>
         </table>
     </div>

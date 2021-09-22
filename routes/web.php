@@ -31,6 +31,8 @@ Route::resource('types', TypeController::class)->middleware('auth');
 Route::post('attributes/confirm', [AttributeController::class, 'confirm'])->name('attributes.confirm')->middleware('auth');
 Route::resource('attributes', AttributeController::class)->middleware('auth');
 
+Route::get('get/{id}',[ProductController::class, 'getAttribute'])->name('product.get_get_attribte');
+Route::post('products/confirm', [ProductController::class, 'confirm'])->name('products.confirm')->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
 
 

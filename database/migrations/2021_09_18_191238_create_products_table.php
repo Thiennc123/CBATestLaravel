@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('price');
             $table->bigInteger('type_id')->unsigned();
             $table->string('supplier');
-            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');;
             $table->timestamps();
         });
     }
