@@ -1,33 +1,63 @@
 @extends('dashboard')
 
 @section('main_content')
-<div class="header">
-    <nav class="navbar navbar-light bg-light ">
-        <h3>Please confirm before actions!!!</h3>
-    </nav>
-</div>
-<div class="info mt-0 row mh-100">
-    @if(isset($request['id']))
-        <form class="w-50" action="{{ route('types.update', ['type' => $request->id]) }}" method="post">
-        @method('put')
-    @else
-        <form action="{{ route('types.store') }}" method="POST">
-    @endif
+    <div class="header">
+        <nav class="navbar navbar-light bg-light ">
+            <h3>Please confirm before actions!!!</h3>
+        </nav>
+    </div>
+    <div class="info mt-0 row mh-100">
+        @if (isset($product['id']))
+            <form class="w-50" action="{{ route('products.update', ['product' => $product['id']]) }}"
+                method="post">
+                @method('put')
+            @else
+                <form action="{{ route('products.store') }}" method="POST">
+        @endif
         @csrf
         <div class="form-group">
-            <label for="exampleInputEmail1">Name Type</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="Enter name of type" value="{{$request['name']}}" >
+            <label for="exampleInputEmail1">Name Product</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Enter name of type"
+                value="{{ $product['name'] }}">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Description</label>
-            <input type="description" class="form-control" name="description" id="description" placeholder=" Enter description" value="{{$request['description']}}">
+            <label for="exampleInputPassword1">amount</label>
+            <input type="text" class="form-control" name="amount" id="amount" placeholder=" Enter description"
+                value="{{ $product['amount'] }}">
         </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">price</label>
+            <input type="text" class="form-control" name="price" id="price" placeholder=" Enter description"
+                value="{{ $product['price'] }}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">supplier</label>
+            <input type="text" class="form-control" name="supplier" id="supplier" placeholder=" Enter description"
+                value="{{ $product['supplier'] }}">
+        </div>
+        <div>
+            {{ $type['name'] }}
+            <input type="hidden" name="type_id" value="{{ $type['id'] }}">
+        </div>
+        <div>
+            @foreach ($product['attribute'] as $key => $value)
+                {{ $key }} : {{ $value }}
+                <input type="hidden" name="value[]" value="{{ $value }}">
+                <br>
+            @endforeach
+            @foreach ($product['id_attribute'] as $item)
+                <input type="hidden" name="attribute_product_id[]" value="{{ $item }}">
+            @endforeach
+        </div>
+        <img src="{{ asset('/storage/tmp/' . $product['url']) }}" alt="">
+        <input type="hidden" name="path[]" value="{{ $product['url'] }}">
         <a href="{{ url()->previous() }}" class="btn btn-xs btn-info pull-right">Return</a>
-    @if(isset($request['id']))
-        <button type="submit" class="btn btn-primary">Update Type</button>
-    @else
-        <button type="submit" class="btn btn-primary">Store Type</button>
-    @endif
-    </form>
-</div>
+        @if (isset($product['id']))
+            <button type="submit" class="btn btn-primary">Update product</button>
+        @else
+            <button type="submit" class="btn btn-primary">Store product</button>
+        @endif
+
+        </form>
+    </div>
 @endsection

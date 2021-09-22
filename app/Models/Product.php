@@ -18,11 +18,12 @@ class Product extends Model
         'amount',
         'price',  
         'supplier',
+        'type_id',
     ];
 
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_product', 'product_id', 'attribute_id');
+        return $this->belongsToMany(Attribute::class, 'attribute_product', 'product_id', 'attribute_id')->withPivot('value');;
     }
 
     public function medias()
