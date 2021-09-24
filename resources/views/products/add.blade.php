@@ -36,9 +36,8 @@
             <div id="attribute">
             </div>
             <div class="form-group">
-                <label for="inputPassword4">Image</label>
-                <input type="file" class="form-control file" placeholder="Image" name="file" id="file">
-                <input type="hidden" name="filetmp" id="filetmp">
+                <label for="inputPassword4">Image</label>  
+                <input type="file" class="form-control file" placeholder="Image" name="file[]" id="file" multiple>  
             </div>
             <button type="submit" class="btn btn-primary">Create Product</button>
         </form>
@@ -49,6 +48,9 @@
         @endforeach
     </div>
     <script type="text/javascript">
+
+        
+
         $(document).ready(function() {
             $('#type').on('change', function() {
                 $('#attribute').empty();
@@ -74,6 +76,8 @@
                     }
                 });
             });
+
+            
         });
     </script>
 @endsection

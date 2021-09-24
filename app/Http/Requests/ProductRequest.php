@@ -21,6 +21,7 @@ class ProductRequest extends FormRequest
     {
         $rules = [
             'name'          => 'required|min:3',
+            'file'          => 'max:5',
         ];
 
         return $rules;
@@ -30,6 +31,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name.required'         => 'Write name pro',
+            'file.max'              => 'Max is 5'
         ];
     }
 }

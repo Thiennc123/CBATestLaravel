@@ -35,4 +35,7 @@ Route::get('get/{id}',[ProductController::class, 'getAttribute'])->name('product
 Route::post('products/confirm', [ProductController::class, 'confirm'])->name('products.confirm')->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
 
-
+Route::get('/export-csv',[ProductController::class, 'exportCsv'])->name('products.export_csv')->middleware('auth');
+Route::get('/import_form', [ProductController::class, 'importForm'])->name('products.import_form')->middleware('auth');
+Route::post('/import-csv',[ProductController::class, 'importCsv'])->name('products.import_csv')->middleware('auth');
+Route::get('/updateStt',[ProductController::class, 'updateStt'])->name('products.updateStt')->middleware('auth'); 

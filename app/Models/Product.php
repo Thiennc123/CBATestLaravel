@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Product extends Model
 {
@@ -14,7 +15,6 @@ class Product extends Model
     protected $fillable = [
         'name',
         'email',
-        'password',
         'amount',
         'price',  
         'supplier',
@@ -34,5 +34,11 @@ class Product extends Model
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public static function getProduct()
+    {
+        $records = DB::table('products')->select('id', 'name', 'amount', 'price')->get()->toArray();
+        return $records;
     }
 }

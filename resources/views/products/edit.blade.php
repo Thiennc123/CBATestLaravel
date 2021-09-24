@@ -37,8 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="inputPassword4">Image</label>
-                <input type="file" class="form-control file" placeholder="Image" name="file" id="file">
-                <input type="hidden" name="filetmp" id="filetmp">
+                <input type="file" class="form-control file" placeholder="Image" name="file[]" id="file" multiple>
             </div>
             <input type="text" name="id" value="{{$product->id}}" hidden="true">
             <button type="submit" class="btn btn-primary">Create Product</button>
