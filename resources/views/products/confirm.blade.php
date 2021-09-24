@@ -49,14 +49,19 @@
                 <input type="hidden" name="attribute_product_id[]" value="{{ $item }}">
             @endforeach
         </div>
-        <img src="{{ asset('/storage/tmp/' . $product['url']) }}" alt="">
-        <input type="hidden" name="path[]" value="{{ $product['url'] }}">
-        <a href="{{ url()->previous() }}" class="btn btn-xs btn-info pull-right">Return</a>
-        @if (isset($product['id']))
-            <button type="submit" class="btn btn-primary">Update product</button>
-        @else
-            <button type="submit" class="btn btn-primary">Store product</button>
-        @endif
+            @foreach ($product['url'] as $key => $value)
+                <img src="{{ asset('/storage/tmp/' . $value) }}" alt="" style="width: 100px; height: 100px; display: inline">
+            @endforeach
+        
+        <input type="hidden" name="path[]" value="{{ json_encode($product['url'])}}" >
+        <div class="d-block mt-5">
+            <a href="{{ url()->previous() }}" class="btn btn-xs btn-info pull-right">Return</a>
+            @if (isset($product['id']))
+                <button type="submit" class="btn btn-primary">Update product</button>
+            @else
+                <button type="submit" class="btn btn-primary ">Store product</button>
+            @endif
+        </div>
 
         </form>
     </div>

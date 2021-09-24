@@ -55,6 +55,9 @@ abstract class BaseRepository implements RepositoryInterface
     public function update(array $input, $id)
     {
         $data = $this->model::find($id);
+        if(isset($input['stt'])){
+            $data->stt = $input['stt'];
+        }
         $data->update($input);
         return $data;
     }
